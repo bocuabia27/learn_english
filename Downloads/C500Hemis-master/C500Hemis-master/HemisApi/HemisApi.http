@@ -1,0 +1,6 @@
+@HemisApi_HostAddress = http://192.168.56.1:5224
+
+GET {{HemisApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

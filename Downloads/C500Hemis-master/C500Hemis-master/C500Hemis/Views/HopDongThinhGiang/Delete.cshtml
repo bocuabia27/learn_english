@@ -1,0 +1,114 @@
+﻿@model C500Hemis.Models.TbHopDongThinhGiang
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body{
+        background-color: #C4DAD2;
+    }
+    div .row{
+        background-color: #E9EFEC;
+        justify-content: center;
+        align-items: center;
+        border-radius:10px;
+        border-collapse: collapse;
+        border: 2px solid #243642;
+        height: 500px
+    }
+    h1{
+        font-weight:bold;
+        text-shadow: 0 0 0.2em #6A9C89;
+        color: #E9EFEC;
+        padding: 5px;
+        background-color: #16423C;
+        display:inline-block;
+        border-radius:8px;
+        margin-top:10px;
+        align-items:center;
+    }
+    .btn-backto{
+        text-decoration:none;
+        display:inline-block;
+        background-color: #1769ff;
+        color:white;
+        padding:6px;
+        border-radius:4px;
+    }
+    .btn-backto:hover{
+        transform: scale(1.05);
+    }
+    .btn-danger:hover{
+        transform: scale(1.05);
+    }
+
+    dt,dd{
+        color: #387478;
+        padding:3px;
+    }
+</style>
+<h1>Warning!</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaHopDongThinhGiang)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaHopDongThinhGiang)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoSoLaoDong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoSoLaoDong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayCapSoLaoDong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayCapSoLaoDong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NoiCapSoLaoDong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NoiCapSoLaoDong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CoGiaTriTu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CoGiaTriTu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CoGiaTriDen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CoGiaTriDen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TyLeThoiGianGiangDay)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TyLeThoiGianGiangDay)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCanBoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdTrangThaiHopDongNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdTrangThaiHopDongNavigation.IdTrangThaiHopDong)
+        </dd>
+    </dl>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdHopDongThinhGiang" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-backto">Back to List</a>
+    </form>
+</div>

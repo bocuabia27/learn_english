@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Cơ sở vật chất";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cơ sở vật chất</title>
+    <style>
+        body {
+            font-family: 'lato', sans-serif;
+            background: radial-gradient(328px at 2.9% 15%, rgb(191, 224, 251) 0%, rgb(232, 233, 251) 25.8%, rgb(252, 239, 250) 50.8%, rgb(234, 251, 251) 77.6%, rgb(240, 251, 244) 100.7%);
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 936px;
+            background-color: #fff;
+            border-radius: 24px;
+            padding: 10px 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin: auto;
+        }
+
+            .wrapper::before {
+                top: 0;
+                left: 0;
+                border-radius: 24px 24px 0 0;
+                content: "";
+                position: absolute;
+                height: 14.5%;
+                width: 100%;
+                background-color: #16a085;
+            }
+
+        h1 {
+            position: relative;
+            padding: 10px 15px;
+            width: 100%;
+        }
+
+        .main-text {
+            font-weight: 600;
+            text-align: center;
+            background-color: #16a085;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1 class="main-text">THÔNG TIN CƠ SỞ VẬT CHẤT </h1>
+        <div class="text-center">
+        </div>
+        <div class="button-csvc">
+            <a href="/DatDai" class="link">Đất Đai</a>
+            <hr />
+
+            <a href="/PhongHocGiangDuongHoiTruong" class="link">Phòng Học, Giảng Đường, Hội Trường</a>
+            <hr />
+
+            <a href="/KiTucXa" class="link">Kí Túc Xá</a>
+            <hr />
+
+            <a href="/CongTrinhCoSoVatChat" class="link">Công Trình Cơ Sở Vật Chất</a>
+            <hr />
+
+            <a href="/PhongThiNghiem" class="link">Phòng Thí Nghiệm</a>
+            <hr />
+
+            <a href="/PhongThucHanh" class="link">Phòng Thực Hành</a>
+            <hr />
+
+            <a href="/ThietBiPtnThtren500Tr" class="link">Thiết Bị Phòng</a>
+            <hr />
+            <a href="/ThuVienTrungTamHocLieu" class="link">
+                Thư Viện Trung Tâm Học Liệu
+            </a>
+            <hr />
+        </div>
+
+    </div>
+</body>
+</html>

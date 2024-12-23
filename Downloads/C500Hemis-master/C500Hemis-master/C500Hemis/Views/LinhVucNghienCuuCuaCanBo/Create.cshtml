@@ -1,0 +1,92 @@
+﻿@model C500Hemis.Models.TbLinhVucNghienCuuCuaCanBo
+
+@{
+    ViewData["Title"] = "Tạo mới";
+}
+
+<h1 class="form-title">TẠO MỚI</h1>
+<h4 class="form-subtitle">LĨNH VỰC NGHIÊN CỨU CỦA CÁN BỘ</h4>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Create" class="p-4 shadow-sm rounded bg-light-green">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="IdLinhVucNghienCuuCuaCanBo" class="control-label"></label>
+                        <input asp-for="IdLinhVucNghienCuuCuaCanBo" class="form-control" />
+                        <span asp-validation-for="IdLinhVucNghienCuuCuaCanBo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdCanBo" class="control-label"></label>
+                        <select asp-for="IdCanBo" class="form-control" asp-items="ViewBag.IdCanBo"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IdLinhVucNghienCuu" class="control-label"></label>
+                        <select asp-for="IdLinhVucNghienCuu" class="form-control" asp-items="ViewBag.IdLinhVucNghienCuu"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LaLinhVucNghienCuuChuyenSau" class="control-label"></label>
+                        <input asp-for="LaLinhVucNghienCuuChuyenSau" class="form-control" />
+                        <span asp-validation-for="LaLinhVucNghienCuuChuyenSau" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SoNamNghienCuu" class="control-label"></label>
+                        <input asp-for="SoNamNghienCuu" class="form-control" />
+                        <span asp-validation-for="SoNamNghienCuu" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Tạo mới" class="btn btn-success w-100" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</div>
+
+<style>
+    /* Giao diện tổng quan */
+   body {
+        position: revert-layer;
+        background-color: palegreen;
+        font-family:'Times New Roman', Times, serif;
+    }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://static.wixstatic.com/media/9d8ed5_80206ab61cf14532924c2295418701a0~mv2.jpg/v1/fit/w_1000%2Ch_710%2Cal_c%2Cq_80/file.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.5; /* Độ mờ của ảnh */
+            z-index: -1;
+        }
+
+    .h1 {
+        position: relative; /* Đảm bảo nội dung nổi lên trên lớp mờ */
+        color: black; /* Đảm bảo chữ hiển thị rõ ràng */
+    }
+
+    }
+    
+
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

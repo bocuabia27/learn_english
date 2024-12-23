@@ -1,0 +1,258 @@
+﻿@model IEnumerable<C500Hemis.Models.TbDoiTuongThamGium>
+
+@{
+    ViewData["Title"] = "Đối tượng tham gia";
+}
+@section Heads{
+         <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.1.7/r-3.0.3/datatables.min.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+}
+
+@*
+     /*B8D55 AT13 Ca Kỳ Hòa*/
+    Nội dung:-Hiện thông tin được tạo từ phần create
+             -Hiển thị số bản ghi
+             -sử dụng datatable
+             -có những chức năng sắp xếp tìm kiếm hiển thị số bản ghi của 1 trang
+             -điều chỉnh màn hình phù hợp với màn hình từng thiết bị
+    Hình thức:- Sử dụng css làm đẹp giao diện
+              - các hàng chẵn lẻ có màu khác nhau
+              - đồng bộ phong cách với các phần khác
+              - có hiệu ứng khi tương tác với các phần trong bảng
+              - có background
+              - căn giữa tất cả các nội dung trong bảng.
+*@
+
+<style>
+    /* Ảnh nền cho trang Index với logo HVAN và màu nền đỏ */
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Đặt ảnh nền là logo HVAN */
+        background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-color: rgb(195, 34, 34); /* Màu nền đỏ */
+    }
+
+    /* Chỉnh font chữ cho tiêu đề H1 */
+    h1 {
+        font-family: Apice; /* Đặt font chữ là Apice cho tiêu đề */
+    }
+
+    /* Tạo một khung chứa */
+    .khungchua {
+        min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao màn hình */
+        height: auto; /* Chiều cao tự động theo nội dung */
+        background-color: #FFF5; /* Màu nền trắng mờ */
+        align-items: center; /* Căn giữa nội dung theo chiều dọc */
+        justify-content: center; /* Căn giữa nội dung theo chiều ngang */
+        border-radius: 10px; /* Bo tròn góc khung */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        padding: 20px; /* Đệm xung quanh khung */
+        margin: 20px; /* Khoảng cách giữa khung và các phần tử khác */
+    }
+
+    /* Chỉnh giao diện cho bảng */
+    table {
+        width: 82vw; /* Chiều rộng bảng chiếm 82% chiều rộng viewport */
+        backdrop-filter: blur(3px); /* Hiệu ứng làm mờ nền phía sau */
+        border-radius: 0.8rem; /* Bo tròn góc bảng */
+        background-color: #FFF5; /* Màu nền trắng mờ */
+        box-shadow: 0 0.4rem 0.8rem #0005; /* Đổ bóng nhẹ */
+        overflow: hidden; /* Ẩn phần nội dung tràn */
+        border: 0.2px; /* Đường viền bảng */
+    }
+
+        /* Chỉnh giao diện phần thead trong bảng */
+        table thead {
+            width: 100%; /* Chiều rộng đầy đủ */
+            height: 10%; /* Chiều cao là 10% */
+            background-color: #d5d1defe; /* Màu nền cho phần thead */
+            padding: 0.8rem 1rem; /* Đệm bên trong */
+        }
+
+        /* Chỉnh giao diện phần tbody trong bảng */
+        table tbody {
+            width: 95%; /* Chiều rộng là 95% */
+            max-height: 89%; /* Chiều cao tối đa là 89% */
+            background-color: #fffb; /* Màu nền trắng nhạt */
+            overflow: auto; /* Cho phép cuộn nếu nội dung quá dài */
+        }
+
+            /* Phân loại màu cho hàng chẵn trong tbody */
+            table tbody tr:nth-child(even) {
+                background-color: #0000000b; /* Màu nền xám nhạt cho hàng chẵn */
+            }
+
+            /* Hiệu ứng hover khi trỏ vào bản ghi của tbody */
+            table tbody tr:hover {
+                background-color: #fff6; /* Màu nền trắng mờ khi hover */
+            }
+
+    /* Chỉnh giao diện nút Edit */
+    .btn-edit {
+        background-color: #41B06E; /* Màu nền xanh lá */
+        color: #E9EFEC; /* Màu chữ trắng nhạt */
+    }
+
+        .btn-edit:hover {
+            background-color: #8DECB4; /* Màu nền khi hover */
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+        }
+
+    /* Chỉnh giao diện nút Details */
+    .btn-details {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-details:hover {
+            background-color: #8DECB4;
+            transform: scale(1.05);
+        }
+
+    /* Chỉnh giao diện nút Delete */
+    .btn-delete {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-delete:hover {
+            transform: scale(1.05);
+            background-color: red; /* Màu nền đỏ khi hover */
+        }
+
+    /* Chỉnh giao diện nút Create */
+    .btn-create {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-create:hover {
+            background-color: #8DECB4;
+            color: black; /* Màu chữ đen khi hover */
+            transform: scale(1.05);
+        }
+
+    /* Chỉnh giao diện nút Excel */
+    .btn-excel {
+        background-color: #41B06E;
+        color: #E9EFEC;
+    }
+
+        .btn-excel:hover {
+            background-color: #8DECB4;
+            color: black;
+            transform: scale(1.05);
+        }
+
+    /* Đặt lại viền cho nút trong DataTable */
+    .dt-buttons .dt-button.btn-primary {
+        border-color: unset;
+    }
+
+</style>
+
+<div class="khungchua">
+<h1 style="text-align:center">Đối tượng tham gia(@Model.Count())</h1>
+    <table class="table" id="views">
+    <thead>
+        <tr nowrap>
+            <th>
+                Mã loại tham gia
+            </th>
+            <th>
+                Loại tham gia
+            </th>
+            <th>
+                Id Người
+            </th>
+            <th nowrap>
+                Phân loại
+            </th>
+            <th>
+                Vai trò    
+            </th>
+            <th style="text-align: center" class="nosort">Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLoaiThamGia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiThamGiaNavigation.LoaiThamGia)
+            </td>
+            <td>
+                        <strong>@Html.DisplayFor(modelItem => item.IdNguoiNavigation.name)</strong>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPhanLoaiNavigation.PhanLoaiDoiNguNguoiHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdVaiTroNavigation.VaiTroThamGia)
+            </td>
+            <td nowrap style="text-align: right">
+                    <a asp-action="Edit" asp-route-id="@item.IdDoiTuongThamGia" class="btn btn-edit"><i class='bx bx-edit-alt'></i> Chỉnh sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.IdDoiTuongThamGia" class="btn btn-details"><i class='bx bx-info-circle'></i> Chi tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdDoiTuongThamGia" class="btn btn-delete"><i class='bx bx-trash-alt'></i> Xóa</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/r-3.0.3/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#views", {
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: 5
+                },
+            ],
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                    search: "",
+                    searchPlaceholder:"Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Tổng cộng _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary btn-create', //Thêm class cho button
+                            text: 'Thêm đối tượng tham gia',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        },
+                        {
+                            extend: "excel",
+                            className: 'btn btn-primary btn-excel', //Thêm class cho button
+                            text: 'Xuất excel',
+                            exportOptions: {
+                                columns: function(idx, data, node) {
+                                    if (node.classList.contains("_nonorder")) return false;
+                                    return true;
+                                },
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+}

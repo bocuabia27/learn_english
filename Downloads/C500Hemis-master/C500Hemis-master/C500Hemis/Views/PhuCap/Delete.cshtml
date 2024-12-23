@@ -1,0 +1,172 @@
+﻿@model C500Hemis.Models.TbPhuCap
+
+@{
+    ViewData["Title"] = "Xóa";
+}
+
+<style>
+    body {
+        background-image: url('/images/ca7.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .header-container {
+        background-color: white;
+        padding: 20px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+    }
+
+    .info-block {
+        background-color: white; /* Màu nền mới */
+        border: 1px solid #ced4da; /* Màu viền mới */
+        border-radius: 8px;
+        padding: 10px; /* Giảm padding */
+        margin-bottom: 10px; /* Giảm margin */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .info-block-canbo {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+        .info-block-canbo h4 {
+            font-size: 1.1rem;
+        }
+
+    .info-block:hover {
+        transform: translateY(-3px);
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .col {
+        flex: 1; /* Tất cả các cột sẽ có cùng chiều rộng */
+        min-width: 150px; /* Chiều rộng tối thiểu cho các cột */
+    }
+
+    .font-weight-bold {
+        font-weight: 600;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        transition: opacity 0.2s;
+    }
+
+        .btn-danger:hover {
+            opacity: 0.8;
+        }
+
+    .container {
+        margin-top: 30px;
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    h4 {
+        color: #343a40;
+        font-size: 1.2rem;
+    }
+
+    h3, h1 {
+        color: #212529;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center header-container">Xóa </h1>
+    <h3 class="text-center">Bạn có chắc chắn muốn xóa không?</h3>
+
+    <!-- Khối thông tin cán bộ và phụ cấp -->
+    <div class="info-block">
+        <h4 class="text-secondary">Thông Tin Cán Bộ</h4>
+        <hr />
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Cán bộ:</div>
+            <div class="col">@Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)</div>
+        </div>
+    </div>
+
+    <div class="info-block">
+        <h4 class="text-secondary">Thông Tin Phụ Cấp</h4>
+        <hr />
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp thu hút nghề:</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapThuHutNghe)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp thâm niên (%):</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapThamNien)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp ưu đãi nghề (%):</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapUuDaiNghe)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp chức vụ (%):</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapChucVu)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp độc hại:</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapDocHai)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phụ cấp khác:</div>
+            <div class="col">@Html.DisplayFor(model => model.PhuCapKhac)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Phần trăm vượt khung (%):</div>
+            <div class="col">@Html.DisplayFor(model => model.PhanTramVuotKhung)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Ngày tháng năm hưởng lương:</div>
+            <div class="col">@Html.DisplayFor(model => model.NgayThangNamHuongLuong)</div>
+        </div>
+    </div>
+
+    <!-- Khối thông tin hệ số lương -->
+    <div class="info-block">
+        <h4 class="text-secondary">Thông Tin Hệ Số Lương</h4>
+        <hr />
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Bậc lương:</div>
+            <div class="col">@Html.DisplayFor(model => model.IdBacLuongNavigation.IdBacLuong)</div>
+        </div>
+        <div class="row mb-3">
+            <div class="col font-weight-bold">Hệ số lương:</div>
+            <div class="col">@Html.DisplayFor(model => model.IdHeSoLuongNavigation.IdHeSoLuong)</div>
+        </div>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdPhuCap" />
+        <div class="text-center">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            <a class="btn btn-secondary" asp-action="Index">Quay lại danh sách</a>
+        </div>
+    </form>
+</div>
+

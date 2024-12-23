@@ -1,0 +1,43 @@
+﻿@model C500Hemis.Models.TbDauMoiLienHe
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="text-center">
+    <h1 class="text-danger">Xóa thông tin</h1>
+    <h3>Bạn có chắc muốn xóa thông tin này</h3>
+    <h4 class="text-secondary">Đầu mối liên hệ</h4>
+    <hr />
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.IdLoaiDauMoiLienHeNavigation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.IdLoaiDauMoiLienHeNavigation.DauMoiLienHe)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" class="form-group d-flex justify-content-between mt-3">
+            <input type="hidden" asp-for="IdDauMoiLienHe" />
+            <a asp-action="Index" class="btn btn-info">Quay lại</a>
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+        </form>
+    </div>
+</div>

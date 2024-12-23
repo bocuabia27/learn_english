@@ -1,0 +1,123 @@
+﻿@model C500Hemis.Models.TbDoiTuongThamGium
+
+@{
+    ViewData["Title"] = "Details";
+}
+@section Heads{
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+}
+@*
+    /*B8D55 AT13 Ca Kỳ Hòa*/
+    Nội dung:
+        - Hiển thị nội dung đã nhập
+        - Có chức năng xem, không thể sửa
+    Hình thức: -sử dụng css làm đẹp
+        - đồng bộ phong cách với các phần khác với màu chủ đạo là đỏ và logo học viện an ninh
+        - có hiệu ứng tương tác với các thuộc tính
+*@
+<style>
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/thumb/8/85/Logo_hoc_vien_ANND.png/330px-Logo_hoc_vien_ANND.png); /* Đặt ảnh nền là logo của học viện */
+        background-repeat: no-repeat; /* Không lặp lại ảnh nền */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-color: rgb(195,34,34); /* Đặt màu nền là đỏ */
+    }
+
+    .khungchua {
+        min-height: 80vh; /* Chiều cao tối thiểu là 80% chiều cao màn hình */
+        width: 600px; /* Chiều rộng cố định là 600px */
+        background-color: #FFF9; /* Màu nền trắng mờ */
+        border-radius: 10px; /* Bo tròn góc khung chứa */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+        margin: auto; /* Căn giữa khung chứa */
+        backdrop-filter: blur(7px); /* Tạo hiệu ứng mờ phía sau */
+    }
+
+    h1, h4 {
+        font-family: Apice; /* Đặt font chữ Apice cho tiêu đề */
+        text-align: center; /* Căn giữa tiêu đề */
+    }
+
+    .btn {
+        display: inline-block; /* Thiết lập các nút theo dạng inline-block */
+        margin: 10px; /* Khoảng cách giữa các nút */
+    }
+
+    .btn-primary {
+        background-color: #41B06E; /* Màu nền xanh lá cho nút chính */
+        color: #E9EFEC; /* Màu chữ xanh nhạt */
+    }
+
+        .btn-primary:hover {
+            background-color: #8DECB4; /* Đổi màu nền khi rê chuột vào nút */
+            transform: scale(1.05); /* Phóng to nhẹ khi rê chuột */
+        }
+
+    .btn-container {
+        display: flex; /* Thiết lập flexbox */
+        justify-content: center; /* Căn giữa các nút bên trong */
+        margin-top: 20px; /* Khoảng cách phía trên của container nút */
+    }
+
+    .header {
+        background-color: #d5d1defe; /* Màu nền của phần header */
+        border-radius: 10px 10px 0 0; /* Bo tròn góc trên của header */
+        height: 100px; /* Chiều cao của header */
+    }
+
+    .row {
+        padding: 20px; /* Khoảng đệm của hàng */
+        padding-top: 80px; /* Khoảng cách trên cùng của hàng */
+    }
+
+    dl {
+        text-align: center; /* Căn giữa văn bản bên trong thẻ dl */
+    }
+</style>
+
+<div class="khungchua">
+    <div class="header">
+    <h1>Chi tiết</h1>
+    <h4>Thông tin chi tiết <strong>@Model.IdNguoiNavigation.name</strong></h4>
+    </div>
+        <dl class="row">
+            <dt class="col-sm-6">
+                Mã loại tham gia
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.MaLoaiThamGia)
+            </dd>
+            <dt class="col-sm-6">
+                Loại tham gia
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IdLoaiThamGiaNavigation.LoaiThamGia)
+            </dd>
+            <dt class="col-sm-6">
+                Họ và tên
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IdNguoiNavigation.name)
+            </dd>
+            <dt class="col-sm-6">
+                Phân loại
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IdPhanLoaiNavigation.PhanLoaiDoiNguNguoiHoc)
+            </dd>
+            <dt class="col-sm-6">
+                Vai trò
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.IdVaiTroNavigation.VaiTroThamGia)
+            </dd>
+        <div class="btn btn-container">
+            <a asp-action="Edit" asp-route-id="@Model?.IdDoiTuongThamGia" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        </div>
+        </dl>
+</div>

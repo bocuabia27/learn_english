@@ -1,0 +1,51 @@
+﻿@model C500Hemis.Models.TbGiaHanChuongTrinhDaoTao
+
+@{
+    ViewData["Title"] = "Xoá";
+}
+
+@section Heads {
+    <script src="https://kit.fontawesome.com/5c202d0407.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #fafbed;
+        }
+    </style>
+}
+
+<div class="container mt-4">
+    <h2 class="text-left">Xác Nhận Xoá Thông Tin</h2>
+    <hr />
+    <table class="table ">
+        <tbody>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdGiaHanChuongTrinhDaoTao)</th>
+                <td>@Html.DisplayFor(model => model.IdGiaHanChuongTrinhDaoTao)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdChuongTrinhDaoTao)</th>
+                <td>@Html.DisplayFor(model => model.IdChuongTrinhDaoTaoNavigation.TenChuongTrinh)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SoQuyetDinhGiaHan)</th>
+                <td>@Html.DisplayFor(model => model.SoQuyetDinhGiaHan)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NgayBanHanhVanBanGiaHan)</th>
+                <td>@Html.DisplayFor(model => model.NgayBanHanhVanBanGiaHan)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.GiaHanLanThu)</th>
+                <td>@Html.DisplayFor(model => model.GiaHanLanThu)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-left mt-4">
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="IdGiaHanChuongTrinhDaoTao" />
+            <button type="submit" class="btn btn-danger me-2">Xoá</button>
+        </form>
+        <a asp-action="Index" class="btn btn-primary">Quay lại danh sách</a>
+    </div>
+</div>

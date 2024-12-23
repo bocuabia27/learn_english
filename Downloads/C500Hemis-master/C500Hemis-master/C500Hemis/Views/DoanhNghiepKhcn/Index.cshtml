@@ -1,0 +1,122 @@
+﻿@model IEnumerable<C500Hemis.Models.TbDoanhNghiepKhcn>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(to right, #1565c0, #64b5f6);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th {
+                background: linear-gradient(to right, #1976d2, #42a5f5);
+                color: white;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .table td {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            .table tr:hover {
+                background-color: #e3f2fd;
+            }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        .btn-create {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+            .btn-create:hover {
+                background-color: #0056b3;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+                transform: scale(1.05);
+            }
+    </style>
+</head>
+
+<body>
+    <h1>Doanh Nghiệp KHCN</h1>
+
+    <p style="text-align: center;">
+        <a asp-action="Create" class="btn-create">Tạo Doanh Nghiệp Mới</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.MaDoanhNghiep)</th>
+                <th>@Html.DisplayNameFor(model => model.TenDoanhNghiep)</th>
+                <th>@Html.DisplayNameFor(model => model.DiaDiemThanhLap)</th>
+                <th>@Html.DisplayNameFor(model => model.QuyMoDauTu)</th>
+                <th>@Html.DisplayNameFor(model => model.KinhPhiGopVonTuTaiSanTriTue)</th>
+                <th>@Html.DisplayNameFor(model => model.TyLeGopVonCuaCsgddh)</th>
+                <th>@Html.DisplayNameFor(model => model.IdHinhThucDoanhNghiepKhcnNavigation)</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.MaDoanhNghiep)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenDoanhNghiep)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DiaDiemThanhLap)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QuyMoDauTu)</td>
+                    <td>@Html.DisplayFor(modelItem => item.KinhPhiGopVonTuTaiSanTriTue)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TyLeGopVonCuaCsgddh)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdHinhThucDoanhNghiepKhcnNavigation.IdHinhThucDoanhNghiepKhcn)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdDoanhNghiepKhcn">Chỉnh sửa</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdDoanhNghiepKhcn">Chi tiết</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdDoanhNghiepKhcn">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

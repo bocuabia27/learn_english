@@ -1,0 +1,169 @@
+﻿@model IEnumerable<C500Hemis.Models.TbTapChiKhoaHoc>
+
+@{
+    ViewData["Title"] = "Đối tượng tham gia";
+    int i = 1;
+}
+@section Heads {
+    <style>
+        footer {
+            visibility: hidden;
+        }
+    </style>
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<div class="khungchua">
+
+    <h1 style="text-align:center">Tạp chí khoa học (@Model.Count())</h1>
+
+    <table class="table" id="views">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaTapChi)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenTapChiTiengViet)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenTapChiTiengAnh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaChuanIssn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoBaiBao1Nam)
+                </th>
+                <th>
+                    Lĩnh vực xuất bản
+                </th>
+                <th>
+                    Xếp loại tạp chí
+                </th>
+                <th style="text-align:center    ">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaTapChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenTapChiTiengViet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenTapChiTiengAnh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaChuanIssn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoBaiBao1Nam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdLinhVucXuatBanNavigation.LinhVucNghienCuu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdXepLoaiTapChiNavigation.TapChiTrongNuoc)
+                    </td>
+                    <td nowrap style="text-align: right; width: 200px">
+                        <a asp-action="Edit" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-edit"><i class='bx bx-edit-alt'></i> Chỉnh sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-details"><i class='bx bx-info-circle'></i> Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.IdTapChiKhoaHoc" class="btn btn-delete"><i class='bx bx-trash-alt'></i> Xóa</a>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+    <div style="width: 100%; margin-top: 30px;">
+        <canvas id="chart"></canvas>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.1.8/b-3.1.2/b-colvis-3.1.2/b-html5-3.1.2/b-print-3.1.2/r-3.0.3/datatables.min.js"></script>
+    <script>
+        //Datatable trong datatable.net. Tìm hiểu thêm thông tin: https://datatables.net/manual/
+        var table = new DataTable("#views", {
+            columnDefs: [
+                {
+                    orderable: false,
+                    targets: 8
+                },
+            ],
+            language: {
+                //Điều chỉnh phần hiển thị label của thanh tìm kiếm - Xem thêm thông tin: https://datatables.net/reference/option/language.search
+                search: "",
+                searchPlaceholder: "Tìm kiếm",
+                //Điều chỉnh phần hiển thị thông tin của table - Xem thêm thông tin: https://datatables.net/reference/option/language.info
+                info: "Tổng cộng _TOTAL_ bản ghi",
+            },
+            createdRow: (row, data, index) => {
+            },
+            layout: {//Layout: https://datatables.net/examples/layout/index.html
+                topStart: {
+                    buttons: [//extension buttons: https://datatables.net/extensions/buttons/config
+                        {
+                            className: 'btn btn-primary btn-create', //Thêm class cho button
+                            text: 'Thêm tạp chí khoa học',
+                            action: function (e, dt, node, config) {//Hành động của button
+                                window.location.href = '@Url.Action("Create")';
+                            }
+                        },
+                        {
+                            extend: "excel",
+                            className: 'btn btn-primary btn-excel', //Thêm class cho button
+                            text: 'Xuất excel',
+                            exportOptions: {
+                                columns: function (idx, data, node) {
+                                    if (node.classList.contains("_nonorder")) return false;
+                                    return true;
+                                },
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+        // Dữ liệu biểu đồ
+        const labels = @Html.Raw(Json.Serialize(Model.Select(m => m.TenTapChiTiengViet)));
+        const data = @Html.Raw(Json.Serialize(Model.Select(m => m.SoBaiBao1Nam)));
+
+        const ctx = document.getElementById('chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Số bài báo mỗi năm',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

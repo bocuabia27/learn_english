@@ -1,0 +1,41 @@
+﻿@model C500Hemis.Models.TbDauMoiLienHe
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <h1 class="text-primary">Thông tin chi tiết</h1>
+    <h4 class="text-secondary">Đầu mối liên hệ</h4>
+    <hr />
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.IdLoaiDauMoiLienHeNavigation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.IdLoaiDauMoiLienHeNavigation.DauMoiLienHe)
+            </dd>
+        </dl>
+
+        <div class="form-group d-flex justify-content-between mt-3">
+            <a asp-action="Index" class="btn btn-info">Quay lại</a>
+            <a asp-action="Edit" asp-route-id="@Model?.IdDauMoiLienHe" class="btn btn-warning">Chỉnh sửa</a>
+        </div>
+    </div>
+</div>

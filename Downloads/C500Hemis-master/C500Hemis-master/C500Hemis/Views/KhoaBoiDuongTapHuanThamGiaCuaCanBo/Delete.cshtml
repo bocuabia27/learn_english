@@ -1,0 +1,148 @@
+﻿@model C500Hemis.Models.TbKhoaBoiDuongTapHuanThamGiaCuaCanBo
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<style>
+    body {
+        background-image: url(https://upload.wikimedia.org/wikipedia/vi/8/85/Logo_hoc_vien_ANND.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgb(230,241,216);
+        background-color: rgba(230,241,216,0.85);
+    }
+    .information {
+        background-color: rgba(230,241,216,0.85);
+        margin:auto;
+        margin-top: 0.5rem;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(50, 50, 110, 0.85);
+        width: 850px;
+        height: 550px;
+    }
+
+    .information dt{
+        text-align: center;
+    }
+    .information dd{
+        text-align: left;
+    }
+
+    .information h1{ 
+        text-align:center;
+    }
+
+    .information h3 {
+        text-align: center;
+    }
+    .dt{
+        white-space:nowrap;
+    }
+
+    .btn-danger:hover{
+        transform: scale(1.05)
+    }
+
+    .btn-blue{
+        background-color:aquamarine;
+    }
+
+    .btn-blue:hover{
+        transform: scale(1.05)
+    }
+
+    .row{
+        margin-left: 200px;
+    }
+    .item{
+        margin: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem; /* Adjust spacing as needed */
+    }
+
+</style>
+     <div class="information">
+        <h1>XÓA THÀNH PHẦN NÀY KHỎI DANH SÁCH</h1>
+
+        <h3>Bạn có chắc chắn muốn xoá thành phần này không???</h3>
+            <hr>
+    
+    <dl class="row">
+                <dt class="col-sm-4" style="white-space:nowrap">
+                    Khoa bồi dưỡng tập huấn
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TenKhoaBoiDuongTapHuan)
+                </dd>
+                <dt class="col-sm-4">
+                    Đơn vị tổ chức
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DonViToChuc)
+                </dd>
+                <dt class="col-sm-4">
+                    Địa điểm tổ chức
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DiaDiemToChuc)
+                </dd>
+                <dt class="col-sm-4">
+                    Thời gian bắt đầu
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ThoiGianBatDau)
+                </dd>
+                <dt class="col-sm-4">
+                    Thời gian kết thúc
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ThoiGianKetThuc)
+                </dd>
+                <dt class="col-sm-4">
+                    Chứng chỉ
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ChungChi)
+                </dd>
+                <dt class="col-sm-4">
+                    Ngày cấp
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.NgayCap)
+                </dd>
+                <dt class="col-sm-4">
+                    ID cán bộ
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdCanBoNavigation.IdCanBo)
+                </dd>
+                <dt class="col-sm-4">
+                    ID Loại bồi dưỡng
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdLoaiBoiDuongNavigation.IdLoaiBoiDuong)
+                </dd>
+                <dt class="col-sm-4">
+                    ID Nguồn kinh phí
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IdNguonKinhPhiNavigation.IdNguonKinhPhi)
+                </dd>
+
+            </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdKhoaBoiDuongTapHuanThamGiaCuaCanBo" />
+        <div class="button-container flex-row justify-content-center">
+            <div class="item"><input type="submit" value="Xóa" class="btn btn-danger" /></div>
+            <div class="item"></div>
+            <div class="item"><a asp-action="Index" class="btn btn-blue"><strong>Quay lại danh sách</strong></a></div>
+            
+        </div>
+    </form>
+
+    </div>

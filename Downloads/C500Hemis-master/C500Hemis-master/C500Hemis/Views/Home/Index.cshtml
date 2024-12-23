@@ -1,0 +1,193 @@
+﻿<!-- Styles -->
+@section Styles {
+    <style type="text/css">
+        a:link {
+            text-decoration: none;
+        }
+    </style>
+}
+
+<!-- Content -->
+<div class="m-0 card" style="margin-top:30px !important; border: none!important">
+    <div class="card">
+        <div class="card-body m-0">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-3">
+                    <div class="col-12 col-sm-12 col-md-12 mb-3" id="divCB"></div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-9">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divHTQT"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCSVC"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCSGD"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divKHCN"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divNH"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divCTDT"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-3">
+                    <div class="col-12 col-sm-12 col-md-12 mb-3" id="divTC"></div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-9">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divTS"></div>
+                        <div class="col-12 col-sm-12 col-md-4 mb-3" id="divVB"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+@section Scripts {
+    <script type="text/javascript">
+        // Dữ liệu các liên kết Cán bộ
+        var linkDataCB = [
+            { title: "CSDL người 821-A", url: "/Nguoi/Index" },
+            { title: "Cán bộ", url: "/CanBo/Index" },
+            { title: "Cán bộ hướng dẫn sinh viên", url: "/CanBoHuongDanThanhCongSinhVien" },
+            { title: "Quá trình công tác của cán bộ", url: "/QuaTrinhCongTacCuaCanBo" },
+            { title: "Quá trình đào tạo của cán bộ", url: "/QuaTrinhDaoTaoCuaCanBo" },
+            { title: "Trình độ tiếng dân tộc", url: "/TrinhDoTiengDanToc" },
+            { title: "Chức danh khoa học của cán bộ -C", url: "/ChucDanhKhoaHocCuaCanBo" },
+            { title: "Đánh giá xếp loại cán bộ", url: "/DanhGiaXepLoaiCanBo" },
+            { title: "Danh hiệu thi đua và khen thưởng", url: "/DanhHieuThiDuaGiaiThuongKhenThuongCanBo" },
+            { title: "Diễn biến lương", url: "/DienBienLuong" },
+            { title: "Đối tượng chính sách cán bộ", url: "/DoiTuongChinhSachCanBo" },
+            { title: "Đơn vị công tác của cán bộ", url: "/DonViCongTacCuaCanBo" },
+            { title: "Đơn vị thỉnh giảng của cán bộ", url: "/DonViThinhGiangCuaCanBo" },
+            { title: "Giảng viên ngoại ngữ", url: "/GiangVienNn" },
+            { title: "Giáo viên quốc phòng an ninh", url: "/GiaoVienQpan" },
+            { title: "Hợp đồng", url: "/HopDong" },
+            { title: "Hợp đồng thỉnh giảng", url: "/HopDongThinhGiang" },
+            { title: "Khóa bồi dưỡng, tập huấn của cán bộ", url: "/KhoaBoiDuongTapHuanThamGiaCuaCanBo" },
+            { title: "Kỷ luật cán bộ", url: "/KyLuatCanBo" },
+            { title: "Lĩnh vực nghiên cứu của cán bộ", url: "/LinhVucNghienCuuCuaCanBo" },
+            { title: "Ngành dùng tên giảng dạy", url: "/NganhDungTenGiangDay" },
+            { title: "Ngành giảng dạy của cán bộ", url: "/NganhGiangDayCuaCanBo" },
+            { title: "Phụ cấp 902-", url: "/PhuCap" }
+        ];
+
+        // Dữ liệu cho Hợp tác quốc tế (HTQT)
+        var linkDataHTQT = [
+            { title: "Tổ chức hợp tác quốc tế 817-", url: "/TbToChucHopTacQuocTes" },
+            { title: "Thông tin hợp tác với tổ chức 915-", url: "/TbThongTinHopTacs" },
+            { title: "Hội thảo/ Hội nghị 814", url: "/TbHoiThaoHoiNghis" },
+            { title: "Đề án/ Dự án/ Chương trình 819", url: "/TbDeAnDuAnChuongTrinhs" },
+            { title: "Lưu học sinh, sinh viên nước ngoài 820-", url: "/TbLuuHocSinhSinhVienNns" },
+            { title: "Giảng viên được cử đi đào tạo 917-", url: "/TbGvduocCuDiDaoTaos" },
+            { title: "Đoàn công tác 901-", url: "/TbDoanCongTacs" },
+            { title: "Thành phần tham gia đoàn công tác 810-", url: "/TbThanhPhanThamGiaDoanCongTacs" },
+            { title: "Tổ chức hợp tác doanh nghiệp", url: "/TbToChucHopTacDoanhNghieps" }
+        ];
+
+        // Dữ liệu cho Khoa học công nghệ (KHCN)
+        var linkDataKHCN = [
+            { title: "Bài báo KH đã công bố 919-", url: "/BaiBaoKhdaCongBo" },
+            { title: "Chuyển giao công nghệ và đào tạo 923-", url: "/ChuyenGiaoCongNgheVaDaoTao" },
+            { title: "Doanh Nghiệp KHCN", url: "/DoanhNghiepKhcn" },
+            { title: "Đối tượng tham gia 802-", url: "/DoiTuongThamGium" },
+            { title: "Giải thưởng khoa học", url: "/GiaiThuongKhoaHoc" },
+            { title: "Hoạt động bảo vệ môi trường 928-", url: "/HoatDongBaoVeMoiTruong" },
+            { title: "Nhiệm Vụ KHCN 827", url: "/NhiemVuKhcn" },
+            { title: "Nhóm nghiên cứu mạnh 905-", url: "/NhomNghienCuuManh" },
+            { title: "Sách Đã Xuất Bản 926-", url: "/SachDaXuatBan" },
+            { title: "Tài sản trí tuệ 932-", url: "/TaiSanTriTue" },
+            { title: "Tạp chí khoa học 813-", url: "/TapChiKhoaHoc" }
+        ];
+
+        var linkDataNH = [
+            { title: "Danh hiệu thi đua giải thưởng khen thưởng người học 803", url: "/DanhHieuThiDuaGiaiThuongKhenThuongNguoiHoc" },
+            { title: "Học viên 918-", url: "/HocVien" },
+            { title: "Kỷ luật người học 933-", url: "/KyLuatNguoiHoc" },
+            { title: "Người học vay tín dụng 903-", url: "/NguoiHocVayTinDung" },
+            { title: "Thông tin học bổng", url: "/ThongTinHocBong" },
+            { title: "Thông tin học tập nghiên cứu sinh-801", url: "/ThongTinHocTapNghienCuuSinh" },
+            { title: "Thông tin người học GDTC 927-", url: "/ThongTinNguoiHocGdtc" },
+            { title: "Thông tin việc làm sau tốt nghiệp 907-", url: "/ThongTinViecLamSauTotNghiep" },
+            { title: "Thông tin vi phạm 927-", url: "/ThongTinViPham" },
+        ];
+
+        var linkDataCSVC = [
+            { title: "Đất Đai 832-", url: "/DatDai" },
+            { title: "Hệ thống cơ sở vật chất phục vụ đào tạo 802-", url: "/HeThongCoSoVatChatPhucVuDaoTao" },
+            { title: "Khu nhà hiệu bộ 934-", url: "/KhuNhaHieuBo" },
+            { title: "Phòng học lý thuyết 902-", url: "/PhongHocLyThuyet" },
+            { title: "Phòng thí nghiệm 802-", url: "/PhongThiNghiem" },
+            { title: "Quy hoạch tổng thể đất đai", url: "/QuyHoachTongTheDatDai" },
+            { title: "Sảnh chờ cán bộ viên chức 811", url: "/SanhChoCanBoVienChucs" },
+            { title: "Trang thiết bị dạy học", url: "/TrangThietBiDayHoc" }
+        ];
+
+        var linkDataCSGD = [
+            { title: "Công đoàn cơ sở", url: "/CongDoanCoSos" },
+            { title: "Tổ chức Đảng", url: "/ToChucDangs" },
+            { title: "Tổ chức Đoàn thanh niên", url: "/ToChucDoanThanhNien" }
+        ];
+
+        var linkDataCTDT = [
+            { title: "Chương trình giáo dục", url: "/ChuongTrinhGiaoDucs" },
+            { title: "Giáo trình - Sách tham khảo 931", url: "/GiaoTrinhSachThamKhaos" },
+            { title: "Mô tả chi tiết ngành học 935", url: "/MoTaChiTietNganhHoc" },
+            { title: "Ngành Đào tạo 910-", url: "/NganhDaoTao" },
+            { title: "Ngành dùng tên đào tạo", url: "/NganhDungTenDaoTao" },
+            { title: "Sách giáo khoa 925-", url: "/SachGiaoKhoa" },
+            { title: "Thời gian đào tạo 930-", url: "/ThoiGianDaoTao" },
+            { title: "Tiêu chuẩn đầu ra", url: "/TieuChuanDauDas" },
+            { title: "Thông tin môn học 912-", url: "/ThongTinMonHocs" }
+        ];
+
+        var linkDataTS = [
+            { title: "Bảo vệ luận văn tốt nghiệp", url: "/BaoVeLuanVanTotNghieps" },
+            { title: "Điều kiện xét tốt nghiệp", url: "/DieuKienXetTotNghieps" },
+            { title: "Đào tạo liên thông", url: "/DaoTaoLienThongs" },
+            { title: "Hồ sơ học viên 913", url: "/HoSoHocViens" },
+            { title: "Khảo sát mức độ hài lòng người học", url: "/KhaoSatMucDoHaiLongs" },
+            { title: "Quy chế đào tạo 802-", url: "/QuyCheDaoTao" }
+        ];
+
+        var linkDataTC = [
+            { title: "Cơ chế chính sách", url: "/CoCheChinhSachs" },
+            { title: "Kế hoạch nhà trường 804", url: "/KeHoachNhaTruong" },
+            { title: "Quy chế nhà trường 922-", url: "/QuyCheNhaTruong" },
+            { title: "Quy chế tài chính 808", url: "/QuyCheTaiChinhs" },
+            { title: "Quy chế tổ chức cán bộ 921-", url: "/QuyCheToChucCanBos" },
+            { title: "Quy chế tuyển sinh", url: "/QuyCheTuyenSinh" },
+            { title: "Sổ tay hướng dẫn 803", url: "/SoTayHuongDans" }
+        ];
+
+        var linkDataVB = [
+            { title: "Công văn pháp luật", url: "/CongVanPhapLuats" },
+            { title: "Hướng dẫn liên quan 824-", url: "/HuongDanLienQuans" },
+            { title: "Kế hoạch triển khai", url: "/KeHoachTrienKhais" },
+            { title: "Thông tư hướng dẫn 914", url: "/ThongTuHuongDans" },
+            { title: "Thông tư liên tịch 825-", url: "/ThongTuLienTichs" },
+            { title: "Văn bản quy phạm pháp luật", url: "/VanBanQuyPhamPhapLuats" }
+        ];
+
+        function generateLinks(data, containerId) {
+            var container = document.getElementById(containerId);
+            data.forEach(function (item) {
+                var link = document.createElement('a');
+                link.href = item.url;
+                link.innerText = item.title;
+                link.style.display = "block";
+                container.appendChild(link);
+            });
+        }
+
+        generateLinks(linkDataCB, "divCB");
+        generateLinks(linkDataHTQT, "divHTQT");
+        generateLinks(linkDataCSVC, "divCSVC");
+        generateLinks(linkDataCSGD, "divCSGD");
+        generateLinks(linkDataKHCN, "divKHCN");
+        generateLinks(linkDataNH, "divNH");
+        generateLinks(linkDataCTDT, "divCTDT");
+        generateLinks(linkDataTS, "divTS");
+        generateLinks(linkDataTC, "divTC");
+        generateLinks(linkDataVB, "divVB");
+    </script>
+}

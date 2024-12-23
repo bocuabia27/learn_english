@@ -1,0 +1,65 @@
+﻿@model C500Hemis.Models.TbCoCauToChuc
+
+@{
+    ViewData["Title"] = "Details";
+}
+@section styles {
+    <link rel="stylesheet" href="~/css/details.css" />
+}
+@section Heads {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+}
+<h1><i class="fas fa-info-circle"></i> Chi tiết</h1>
+
+<div class="container">
+    <h4>Cơ cấu tổ chức</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPhongBanDonVi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaPhongBanDonVi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPhongBanDonViCha)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaPhongBanDonViCha)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenPhongBanDonVi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenPhongBanDonVi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoQuyetDinhThanhLap)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoQuyetDinhThanhLap)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayRaQuyetDinh)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NgayRaQuyetDinh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdLoaiPhongBanNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdLoaiPhongBanNavigation.LoaiPhongBan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdTrangThaiNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdTrangThaiNavigation.TrangThaiCoSoGd)
+        </dd>
+    </dl>
+    <div class="button-container">
+        <a asp-action="Edit" asp-route-id="@Model?.IdCoCauToChuc">Chỉnh sửa</a>
+        <a asp-action="Index">Quay lại</a>
+    </div>
+</div>
