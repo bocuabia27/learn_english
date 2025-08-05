@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>🔗 Trò chơi nối chữ</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.6.1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 { text-align: center; color: #333; }
+        input, button {
+            padding: 8px; margin: 8px 0; width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff; color: white;
+            border: none; cursor: pointer; font-weight: bold;
+        }
+        button:hover { background-color: #0056b3; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 6px; }
+        .connected { color: green; font-weight: bold; }
+        .error { color: red; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<h2>🔗 Trò chơi nối chữ</h2>
+
+<div id="login-section">
+    <h3>Đăng nhập</h3>
+    <input id="username" placeholder="Tên đăng nhập (VD: tung1)" />
+    <input id="password" type="password" placeholder="Mật khẩu" />
+    <button onclick="login()">Đăng nhập</button>
+    <div id="login-response"></div>
+</div>
+
+<div id="game-section" class="hidden">
+    <h3>Kết nối phòng</h3>
+    <input id="gameSessionId" placeholder="ID phòng chơi" value="room1" />
+    <input id="sessionPassword" placeholder="Mật khẩu phòng" value="123" />
+    <button onclick="connect()">🔌 Kết nối WebSocket</button>
+    <div id="status"></div>
+
+    <hr />
+    <input id="word" placeholder="Nhập từ cần nối..." />
+    <button onclick="sendMessage()">📤 Gửi từ</button>
+    <p>Lượt chơi: <span id="turn">1</span></p>
+    <ul id="messages"></ul>
+</div>
+
+<script>
+    let stompClient = null;
+    let token = null;
+    let turn = 1;
+
+    async function login() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+        if (!username || !password) {
+            document.getElementById("login-response").innerHTML = "Vui lòng nhập tài khoản và mật khẩu!";
+            return;
+        }
+
+        try {
+            const res = await fetch("http://localhost:8080/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                token = data.jwt;
+                localStorage.setItem("jwtToken", token);
+                document.getElementById("login-response").innerHTML = "✅ Đăng nhập thành công!";
+                document.getElementById("login-section").classList.add("hidden");
+                document.getElementById("game-section").classList.remove("hidden");
+            } else {
+                document.getElementById("login-response").innerHTML = "❌ " + (data.message || "Đăng nhập thất bại!");
+            }
+        } catch (err) {
+            document.getElementById("login-response").innerHTML = "❌ Lỗi kết nối server!";
+        }
+    }
+
+    function connect() {
+        token = token || localStorage.getItem("jwtToken");
+        if (!token) return alert("Bạn cần đăng nhập trước.");
+
+        const gameSessionId = document.getElementById("gameSessionId").value.trim();
+        if (!gameSessionId) {
+            document.getElementById("status").innerHTML = "Vui lòng nhập ID phòng!";
+            document.getElementById("status").className = "error";
+            return;
+        }
+
+        const socket = new SockJS("http://localhost:8080/ws");
+        stompClient = Stomp.over(socket);
+        stompClient.debug = () => {};
+
+        stompClient.connect(
+            { Authorization: `Bearer ${token}` },
+            () => {
+                document.getElementById("status").innerHTML = "✅ Đã kết nối WebSocket!";
+                document.getElementById("status").className = "connected";
+
+                stompClient.subscribe(`/topic/game/${gameSessionId}`, (message) => {
+                    const res = JSON.parse(message.body);
+                    const li = document.createElement("li");
+                    li.textContent = `${res.success ? "✅" : "❌"} ${res.word || ""}: ${res.message}`;
+                    document.getElementById("messages").appendChild(li);
+
+                    if (res.nextTurn != null) {
+                        turn = res.nextTurn;
+                        document.getElementById("turn").textContent = turn;
+                    }
+
+                    if (!res.success) {
+                        document.getElementById("status").innerHTML = "❌ " + res.message;
+                        document.getElementById("status").className = "error";
+                    }
+                });
+            },
+            (err) => {
+                document.getElementById("status").innerHTML = "❌ Kết nối thất bại!";
+                document.getElementById("status").className = "error";
+            }
+        );
+    }
+
+    function sendMessage() {
+        if (!stompClient || !stompClient.connected) {
+            document.getElementById("status").innerHTML = "❌ Chưa kết nối WebSocket!";
+            document.getElementById("status").className = "error";
+            return;
+        }
+
+        const word = document.getElementById("word").value.trim();
+        if (!word) return alert("Vui lòng nhập từ!");
+
+        const gameSessionId = document.getElementById("gameSessionId").value.trim();
+        const sessionPassword = document.getElementById("sessionPassword").value.trim();
+        const username = extractUsername(token);
+
+        stompClient.send("/app/game/play", { Authorization: `Bearer ${token}` }, JSON.stringify({
+            word, gameSessionId, sessionPassword, turn, username
+        }));
+
+        document.getElementById("word").value = "";
+    }
+
+    function extractUsername(jwt) {
+        try {
+            return jwt_decode(jwt).sub || "anonymous";
+        } catch (_) {
+            return "anonymous";
+        }
+    }
+</script>
+</body>
+</html>
